@@ -11,16 +11,6 @@ public class controller {
     @Autowired
 
     private TokenService tokenService;
-    @PostMapping("/login")
-    public  ResponseEntity<String> login(@RequestBody username username) {
-
-        return ResponseEntity.ok("Good!"+username.getUsername()+"\n"+username.getPassword());
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody username username) {
-        return ResponseEntity.ok("<p>Good!"+username.getUsername()+"</p><p>"+username.getPassword()+"</p>");
-    }
 
     @GetMapping(value = "/token/all",produces = "application/json")
     public String getToken_all(
