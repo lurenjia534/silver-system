@@ -1,0 +1,23 @@
+openapi: 3.0.3
+info:
+  description: demo1 API
+  title: demo1 API
+  version: 1.0.0
+servers:
+- url: https://demo1
+paths:
+  /hello:
+    get:
+      operationId: helloWorld
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      summary: GET hello
+      x-accepts: '*/*'
+components:
+  schemas: {}
+
