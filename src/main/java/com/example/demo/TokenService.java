@@ -97,6 +97,7 @@ public class TokenService {
 
         try {
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+            System.out.println("Response:"+response.getBody());
             return response.getBody();
         } catch (HttpClientErrorException e) {
             System.out.println("Error while making request:"+e.getMessage());
