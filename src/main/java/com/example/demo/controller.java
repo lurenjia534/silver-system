@@ -1,16 +1,19 @@
 package com.example.demo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class controller {
-    @Autowired
 
-    private TokenService tokenService;
+    private final TokenService tokenService;
+
+    @Autowired
+    public controller(TokenService tokenService) {
+        this.tokenService = tokenService;
+    }
 
     @GetMapping(value = "/token/all",produces = "application/json")
     public String getToken_all(
