@@ -62,5 +62,20 @@ public class controller {
         String quotaJson = tokenService.getDriveQuota(accessToken, userId);
         return ResponseEntity.ok(quotaJson);
     }
+
+    @GetMapping(value = "/user/profile",produces = "application/json")
+    public ResponseEntity<String> getUserProfile(
+            @RequestParam String tenantId,
+            @RequestParam String clientId,
+            @RequestParam String clientSecret,
+            @RequestParam String grantType,
+            @RequestParam String scope,
+            @RequestParam String userId
+    )throws JsonProcessingException {
+        String accessToken = tokenService.getTokenAccessToken(tenantId, clientId, clientSecret, grantType, scope);
+        String profileJson = tokenService.getUserProfile(accessToken, userId);
+        return ResponseEntity.ok(profileJson);
+    }
+
 }
 

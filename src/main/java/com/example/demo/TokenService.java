@@ -99,6 +99,8 @@ public class TokenService {
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
             return response.getBody();
         } catch (HttpClientErrorException e) {
+            System.out.println("Error while making request:"+e.getMessage());
+            System.out.println("Response body:"+e.getResponseBodyAsString());
             return null;
         }
     }
@@ -106,6 +108,11 @@ public class TokenService {
     public String getDriveQuota(String accessToken,String userId)throws JsonProcessingException{
         String url = "https://graph.microsoft.com/v1.0/users/"+userId+"/drive";
         // set headers
+        return getString(accessToken, url);
+    }
+
+    public String getUserProfile(String accessToken,String userId){
+        String url = "https://graph.microsoft.com/v1.0/users/"+userId;
         return getString(accessToken, url);
     }
 
