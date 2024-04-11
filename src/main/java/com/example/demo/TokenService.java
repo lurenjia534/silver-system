@@ -108,7 +108,7 @@ public class TokenService {
         }
     }
 
-    public String getDriveQuota(String accessToken,String userId)throws JsonProcessingException{
+    public String getDriveQuota(String accessToken,String userId){
         String url = "https://graph.microsoft.com/v1.0/users/"+userId+"/drive";
         // set headers
         return getString(accessToken, url);
