@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -76,7 +77,8 @@ public class TokenService {
                 response != null
         ) {
             ObjectMapper mapper = new ObjectMapper();
-            Map<String, String> result = mapper.readValue(response, Map.class);
+            Map<String, String> result = mapper.readValue(response, new TypeReference<>() {
+            });
             return result.get("access_token");
         } else {
             return null;
