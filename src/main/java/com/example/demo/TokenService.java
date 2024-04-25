@@ -110,13 +110,30 @@ public class TokenService {
 
     public String getDriveQuota(String accessToken,String userId){
         String url = "https://graph.microsoft.com/v1.0/users/"+userId+"/drive";
-        // set headers
         return getString(accessToken, url);
     }
 
     public String getUserProfile(String accessToken,String userId){
         String url = "https://graph.microsoft.com/v1.0/users/"+userId;
         return getString(accessToken, url);
+    }
+
+    public String getDownloadLink(String accessTok,String itemID){
+        String url = "https://graph.microsoft.com/v1.0/me/drive/items/"+itemID;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(accessTok);
+        HttpEntity<String> entity = new HttpEntity<>("parameters",headers);
+
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String> result = mapper.readValue(response.getBody(), new TypeReference<>() {});
+            return result.get("@microsoft.graph.downloadUrl");
+        }catch (HttpClientErrorException | JsonProcessingException e){
+            System.out.println("Error while making request:"+e.getMessage());
+            System.out.println("Response body:"+e.getMessage());
+            return null;
+        }
     }
 
 }

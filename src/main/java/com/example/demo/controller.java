@@ -80,5 +80,21 @@ public class controller {
         return ResponseEntity.ok(profileJson);
     }
 
+    @GetMapping(value = "/file/download",produces = "application/json")
+    public ResponseEntity<String> downloadFile(
+            @RequestParam String tenantId,
+            @RequestParam String clientId,
+            @RequestParam String clientSecret,
+            @RequestParam String grantType,
+            @RequestParam String scope,
+            @RequestParam String userId,
+            @RequestParam String fileId
+
+    ) throws JsonProcessingException{
+        String accessToken = tokenService.getTokenAccessToken(tenantId, clientId, clientSecret, grantType, scope);
+        String downloadJson = tokenService.getDownloadLink(accessToken, fileId);
+        return ResponseEntity.ok(downloadJson);
+    }
+
 }
 
