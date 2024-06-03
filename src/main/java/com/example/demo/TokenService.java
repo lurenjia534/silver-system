@@ -136,5 +136,10 @@ public class TokenService {
         }
     }
 
+    public String listFilesInFolder(String accessToken, String userId, String folderId) {
+        String url = "https://graph.microsoft.com/v1.0/users/" + userId + "/drive/items/" + folderId + "/children";
+        return getString(accessToken, url);
+    }
+
 }
 

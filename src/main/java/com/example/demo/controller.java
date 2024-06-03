@@ -96,5 +96,21 @@ public class controller {
         return ResponseEntity.ok(downloadJson);
     }
 
+    @GetMapping(value = "/files/inFolder", produces = "application/json")
+    public ResponseEntity<String> listFilesInFolder(
+            @RequestParam String tenantId,
+            @RequestParam String clientId,
+            @RequestParam String clientSecret,
+            @RequestParam String grantType,
+            @RequestParam String scope,
+            @RequestParam String userId,
+            @RequestParam String folderId
+    ) throws JsonProcessingException {
+
+        String accessToken = tokenService.getTokenAccessToken(tenantId, clientId, clientSecret, grantType, scope);
+        String fileJson = tokenService.listFilesInFolder(accessToken, userId, folderId);
+        return ResponseEntity.ok(fileJson);
+    }
+
 }
 
